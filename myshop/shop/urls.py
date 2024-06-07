@@ -4,8 +4,8 @@ from .views import ProductViewSet, CartViewSet
 
 router = DefaultRouter()
 router.register(r'products', ProductViewSet)
-router.register(r'cart', CartViewSet, basename='cart')
+router.register(r'cart', CartViewSet)
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
 ]
