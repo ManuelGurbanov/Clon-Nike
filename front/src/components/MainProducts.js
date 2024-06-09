@@ -16,8 +16,8 @@ function MainProducts( { tittle }) {
   }, []);
 
   return (
-    <div className="flex-col items-center justify-center m-20">
-      <h1 className="mb-4 text-2xl font-thin text-left"> {tittle} </h1>
+    <div className="flex-col items-center justify-center m-20 max-w-[100vw]">
+      <h1 className="mb-4 text-2xl font-normal text-left"> {tittle} </h1>
       <div className="flex gap-6 overflow-scroll">
         {products.map(product => (
           <ProductCard key={product.id} product={product} />
