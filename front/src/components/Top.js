@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
+import Cart from './Cart';
+  
 
 const Top = () => {
   const [footerContent, setFooterContent] = useState('');
   const [sliderIndex, setSliderIndex] = useState(0);
+  const [cartVisible, setCartVisible] = useState(false);
 
+  const toggleCartVisibility = () => {
+    setCartVisible(!cartVisible);
+    console.log("Cart visibility toggled");
+  };
   const content = {
     hombre: 'Ropa deportiva para hombres en oferta',
     mujer: 'Ropa de vestir en oferta',
@@ -40,7 +47,8 @@ const Top = () => {
 
   return (
     <section className="fixed top-0 flex-col items-center justify-center w-screen h-20 font-bold">
-      <header className='flex items-center justify-center w-full text-white bg-black'>
+
+      <header className='items-center justify-center hidden w-full text-white bg-black sm:flex'>
         <h1 className='m-2 text-center'>Hasta 6 cuotas sin interés con todos los bancos</h1>
       </header>
 
@@ -48,12 +56,12 @@ const Top = () => {
         <div className='w-[15%]'>
           <img
             src='https://nikearprod.vtexassets.com/assets/vtex/assets-builder/nikearprod.store/2.0.63/icons/Assets_for_off%20platform/swoosh___33f7ffaf2fc124733c2c4a60a12a1160.svg'
-            className='w-[15%]'
+            className='w-[50%] sm:w-[15%]'
             alt='Nike Logo'
           />
         </div>
 
-        <div className='flex items-center justify-center text-center cursor-pointer w-[70%] font-light'>
+        <div className='hidden items-center justify-center text-center cursor-pointer w-[70%] font-light sm:flex'>
           <a
             className='mx-6 hover:underline underline-offset-8'
             onMouseEnter={() => handleMouseEnter(content.hombre)}
@@ -100,17 +108,23 @@ const Top = () => {
           <input
             type="text"
             placeholder="Buscar"
-            className="px-2 py-1 font-thin border border-gray-200 rounded"
+            className="hidden px-2 py-1 font-thin border border-gray-200 rounded sm:block"
           />
-          <img
-            src='https://e7.pngegg.com/pngimages/833/426/png-clipart-shopping-cart-icon-shopping-cart-black-design.png'
-            className='w-6'
-            alt='Shopping Cart Icon'
-          />
+
+            <button
+                onClick={toggleCartVisibility}
+            >
+                <img
+                        src='https://e7.pngegg.com/pngimages/833/426/png-clipart-shopping-cart-icon-shopping-cart-black-design.png'
+                        className='w-6'
+                        alt='Shopping Cart Icon'
+                />
+            </button>
+
         </div>
       </main>
 
-        <section className={`flex items-center justify-center w-full h-24 text-sm text-center text-black bg-white ${footerContent ? 'hidden' : 'flex'}`}>
+        <section className={`items-center justify-center w-full h-24 text-sm text-center text-black bg-white ${footerContent ? 'hidden' : 'sm:flex hidden'}`}>
             <button onClick={lowerIndex}>-</button>
 
             <div className='flex flex-col items-center justify-center ml-5 mr-5'>
@@ -128,6 +142,9 @@ const Top = () => {
             <h1 className='m-2 mb-6 font-light text-center'>{footerContent}</h1>
 
         </footer>
+
+
+        {cartVisible && <Cart />}
     </section>
   );
 };
